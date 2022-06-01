@@ -37,12 +37,18 @@ public class ValidateAspect {
         String className = methodSignature.getMethod().getAnnotation(Validate.class).validator().getText();
         Object[] o = joinPoint.getArgs();
         Class clazz = applicationContext.getBean(className).getClass();
+        String controllerName = joinPoint.getThis().getClass().getName();
+        controllerName = controllerName.contains("$$") ? controllerName.substring(0,controllerName.indexOf("$$"))  : controllerName;
+        Class controller = Class.forName(controllerName);
+        controller.getField("isChecked").setBoolean(joinPoint.getThis(),true);
+
 
         boolean result = (boolean) clazz.getMethod("validate", o[0].getClass()).invoke(applicationContext.getBean(className), o[0]);
 
         if (!result) {
             logger = LoggerFactory.getLogger(joinPoint.getThis().getClass());
             logger.error("Validation Error {}", joinPoint.getArgs()[0]);
+            controller.getField("isChecked").setBoolean(joinPoint.getThis(),false);
         }
     }
 }

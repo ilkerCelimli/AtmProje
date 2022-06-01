@@ -5,10 +5,11 @@ import com.portifolyo.atmproject.entities.dto.UserRegisterDto;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDateTime;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 public class UserValidation {
 
-    private String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+    private Pattern emailRegex = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
 
     public boolean validate(UserRegisterDto dto) {
         if (dto.getName().isEmpty() || dto.getName().isBlank() || dto.getName().length() <= 3) {
@@ -23,9 +24,9 @@ public class UserValidation {
             return false;
         }*/
 
-        if (!dto.getEmail().matches(emailRegex)) {
+       /* if (!emailRegex.matcher(dto.getEmail()).matches()) {
             return false;
-        }
+        }*/
 
         if (dto.getSecretAnswer().isEmpty() || dto.getSecretAnswer().isBlank() || dto.getSecretQuestion().length() <= 3) {
             return false;

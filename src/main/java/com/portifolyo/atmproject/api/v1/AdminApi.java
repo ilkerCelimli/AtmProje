@@ -22,7 +22,8 @@ public class AdminApi {
 
     private final AdminService adminService;
     private final AdminRegisterDtoConverter adminRegisterDtoConverter;
-    private boolean isChecked = false;
+    public boolean isChecked = false;
+
     public AdminApi(AdminService adminServiceImpl, AdminRegisterDtoConverter adminRegisterDtoConverter) {
         this.adminService = adminServiceImpl;
         this.adminRegisterDtoConverter = adminRegisterDtoConverter;
@@ -34,22 +35,17 @@ public class AdminApi {
 
         try {
             boolean result = adminService.CheckAdmin(adminRegisterDto.getUserRegisterDto().getEmail());
-            if (!result) {
+            if (!isChecked) {
+                throw new Exception("Doğrulama hatası");
+            } else if (!result) {
                 this.adminService.addEntity(adminRegisterDtoConverter.ToEntity(adminRegisterDto));
                 return ResponseEntity.created(null).build();
             }
-            else return ResponseEntity.badRequest().body("Email sistemde Mevcut");
+            else throw new Exception("Sql Hatası");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
 
-
-
-         catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
     }
-
-
-
-
-
 }
+
