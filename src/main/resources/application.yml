@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: atm-proje
+    version: 0.0.1-SNAPSHOT
+  jpa:
+    hibernate:
+      ddl-auto: update
+  data:
+  datasource:
+    hikari:
+      username: admin
+      password: 12345
+    url: jdbc:postgresql://localhost:10000/atm-project
+    tomcat:
+      max-wait: 1000
+      max-active: 3
+      test-on-borrow: true
+#url  jdbc:postgresql://tyke.db.elephantsql.com:5432/svokywqh
+# password dHiPmrVPuSjsyfg68z1BuX0N9KAq_KN_
+#username svokywqh
+logging:
+  file:
+    path: classpath:/log
+    name: atm-proje
