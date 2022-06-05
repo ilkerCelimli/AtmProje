@@ -24,9 +24,9 @@ public class UserValidation {
             return false;
         }*/
 
-       /* if (!emailRegex.matcher(dto.getEmail()).matches()) {
+        if (!emailRegex.matcher(dto.getEmail()).matches()) {
             return false;
-        }*/
+        }
 
         if (dto.getSecretAnswer().isEmpty() || dto.getSecretAnswer().isBlank() || dto.getSecretQuestion().length() <= 3) {
             return false;

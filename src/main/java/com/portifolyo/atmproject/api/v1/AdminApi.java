@@ -22,7 +22,7 @@ public class AdminApi {
 
     private final AdminService adminService;
     private final AdminRegisterDtoConverter adminRegisterDtoConverter;
-    public boolean isChecked = false;
+    public boolean isChecked = true;
 
     public AdminApi(AdminService adminServiceImpl, AdminRegisterDtoConverter adminRegisterDtoConverter) {
         this.adminService = adminServiceImpl;
@@ -41,7 +41,7 @@ public class AdminApi {
                 this.adminService.addEntity(adminRegisterDtoConverter.ToEntity(adminRegisterDto));
                 return ResponseEntity.created(null).build();
             }
-            else throw new Exception("Sql Hatası");
+            else throw new Exception("Email sistemde mevcut.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

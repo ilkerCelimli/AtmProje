@@ -40,7 +40,13 @@ public class ValidateAspect {
         String controllerName = joinPoint.getThis().getClass().getName();
         controllerName = controllerName.contains("$$") ? controllerName.substring(0,controllerName.indexOf("$$"))  : controllerName;
         Class controller = Class.forName(controllerName);
-        controller.getField("isChecked").setBoolean(joinPoint.getThis(),true);
+        Field ischecked = controller.getDeclaredField("isChecked");
+       // ischecked.setAccessible(true);
+        ischecked.set(joinPoint.getThis(),true);
+        //controller.getField("isChecked").setBoolean(joinPoint.getThis(),true);
+
+        // şimdi hata burda AdminApi'deki field'i değiştirmemize rağmen AdminApide yine default olarak değer gidiyo
+        // aşağıdaki if içerisine girmeden false olarak gidiyo nedense
 
 
         boolean result = (boolean) clazz.getMethod("validate", o[0].getClass()).invoke(applicationContext.getBean(className), o[0]);
@@ -48,7 +54,8 @@ public class ValidateAspect {
         if (!result) {
             logger = LoggerFactory.getLogger(joinPoint.getThis().getClass());
             logger.error("Validation Error {}", joinPoint.getArgs()[0]);
-            controller.getField("isChecked").setBoolean(joinPoint.getThis(),false);
+          //  controller.getField("isChecked").setBoolean(joinPoint.getThis(),false);
+            ischecked.set(joinPoint.getThis(),false);
         }
     }
 }
