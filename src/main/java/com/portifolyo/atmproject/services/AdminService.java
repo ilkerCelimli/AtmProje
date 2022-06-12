@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface AdminService extends BaseService<Admin>{
 
-    List<CustomerInfo> findCustomers();
-    boolean CheckAdmin(String email);
+    boolean checkAdmin(String email);
+    List<CustomerInfo> findByCustomers();
 }

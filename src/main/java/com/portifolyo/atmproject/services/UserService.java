@@ -1,10 +1,8 @@
 package com.portifolyo.atmproject.services;
 
 import com.portifolyo.atmproject.entities.User;
-import com.portifolyo.atmproject.repositories.projections.UserInfo;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public interface UserService extends BaseService<User> {
 

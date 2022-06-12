@@ -2,13 +2,10 @@ package com.portifolyo.atmproject.services.impl;
 
 import com.portifolyo.atmproject.entities.User;
 import com.portifolyo.atmproject.repositories.UserRepository;
-import com.portifolyo.atmproject.repositories.projections.UserInfo;
 import com.portifolyo.atmproject.services.UserService;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 @Service

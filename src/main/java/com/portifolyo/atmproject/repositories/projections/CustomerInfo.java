@@ -6,16 +6,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public interface CustomerInfo {
-    String getId();
-
-    Date getCreatedDate();
-
-    Date getUpdatedDate();
-
-    Date getDeletedDate();
-
-    Boolean isIsDeleted();
-
     Roles getRole();
 
     BigDecimal getBalance();
@@ -25,11 +15,17 @@ public interface CustomerInfo {
     interface UserInfo {
         String getId();
 
+        Date getCreatedDate();
+
+        Date getUpdatedDate();
+
         String getName();
 
         String getSurname();
 
         String getEmail();
+
+        String getSecretQuestion();
 
         Date getBirtday();
     }
